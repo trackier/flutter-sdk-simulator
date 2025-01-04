@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_simulator/Constants/Keys.dart';
 import 'package:flutter_simulator/Screens/HomeScreen.dart';
 import 'package:flutter_simulator/Screens/SplashScreen.dart';
 import 'package:trackier_sdk_flutter/trackierconfig.dart';
 import 'package:trackier_sdk_flutter/trackierfluttersdk.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:app_links/app_links.dart';
 import 'Screens/BuildinEventScreen.dart';
 import 'Screens/CustomEventsScreen.dart';
@@ -14,6 +15,9 @@ import 'Screens/CakeScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load the environment variables from the .env file
+  await dotenv.load();
 
   // Initialize SDKs
   _initializeSDKs();
@@ -73,7 +77,12 @@ class MyApp extends StatelessWidget {
 
 void _initializeSDKs() async {
   try {
-    final trackerSDKConfig = TrackerSDKConfig(Constants.trDevKey, "production");
+    // Get the environment variables directly from dotenv
+    final trDevKey = dotenv.env['TR_DEV_KEY'] ?? "default_value";
+    final secretId = dotenv.env['SECRET_ID'] ?? "default_value";
+    final secretKey = dotenv.env['SECRET_KEY'] ?? "default_value";
+
+    final trackerSDKConfig = TrackerSDKConfig(trDevKey, "production");
 
     // Set user details
     Trackierfluttersdk.setUserId("009013452535353");
@@ -82,7 +91,7 @@ void _initializeSDKs() async {
     Trackierfluttersdk.setUserPhone("8130300721");
 
     // Set app secrets
-    trackerSDKConfig.setAppSecret(Constants.secretId, Constants.secretKey);
+    trackerSDKConfig.setAppSecret(secretId,secretKey);
 
     // Initialize Trackier SDK
     Trackierfluttersdk.initializeSDK(trackerSDKConfig);

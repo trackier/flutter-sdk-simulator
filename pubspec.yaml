@@ -42,6 +42,7 @@ dependencies:
   http: ^1.2.2
   flutter_launcher_icons: ^0.14.2
   app_links: ^6.3.3
+  flutter_dotenv: ^5.0.2
 
 
 
@@ -83,6 +84,7 @@ flutter:
     - Image/chocochipcupcake.png
     - Image/vanillaccupake.jpeg
     - Image/trackierlogo.png
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
