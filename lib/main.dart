@@ -82,7 +82,7 @@ void _initializeSDKs() async {
     final secretId = dotenv.env['SECRET_ID'] ?? "default_value";
     final secretKey = dotenv.env['SECRET_KEY'] ?? "default_value";
 
-    final trackerSDKConfig = TrackerSDKConfig(trDevKey, "production");
+    final trackerSDKConfig = TrackerSDKConfig(trDevKey, "development");
 
     // Set user details
     Trackierfluttersdk.setUserId("009013452535353");
